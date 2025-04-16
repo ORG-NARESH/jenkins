@@ -36,6 +36,6 @@ echo "=== Jenkins service status ==="
 sudo systemctl status jenkins --no-pager || true
 
 echo "=== Jenkins initial admin password ==="
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword || echo "Password file not found (Jenkins may still be starting)."
+sudo sleep 30 ; cat /var/lib/jenkins/secrets/initialAdminPassword || echo "Password file not found (Jenkins may still be starting)."
 
 echo "=== Jenkins installation complete! Access via: http://<your-server-ip>:8080 ==="
