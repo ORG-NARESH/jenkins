@@ -1,20 +1,20 @@
 pipeline {
-    agent any 
-        stages {
-            stage ('build'){
-                steps {
-                   sh "building"
+ agent any 
+ stages {
+    stage ('initiating terraform'){
+          steps {
+                   sh 'terraform init -var-file=dev/dev.tfvars'
                 }
             }
-            stage('Test') {
-            steps {
-                echo 'Testing..'
-                  }
+    stage('Terrafom plan') {
+        steps {
+                sh 'terrform plan -var-file=dev/dev.tfvars'
+              }
             }
-              stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-                  }
+    stage('Terraform apply') {
+        steps {
+            sh 'terraform apply -var-file=dev/dev.tfvars'
+              }
             }
 
         }

@@ -39,3 +39,18 @@ echo "=== Jenkins initial admin password ==="
 sudo sleep 30 ; cat /var/lib/jenkins/secrets/initialAdminPassword || echo "Password file not found (Jenkins may still be starting)."
 
 echo "=== Jenkins installation complete! Access via: http://<your-server-ip>:8080 ==="
+
+
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install terraform
+
+
+dnf install git -y
+
+
+
+sudo growpart /dev/xvda 4
+sudo lvextend -l +60%FREE /dev/mapper/RootVG-homeVol
+sudo lvextend -l +1000%FREE /dev/mapper/RootVG-varVol
+sudo xfs_growfs  /var ; sudo xfs_growfs  /home
